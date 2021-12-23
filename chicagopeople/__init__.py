@@ -9,7 +9,6 @@ from collections import OrderedDict
 import string
 from .ratios import ratios
 from .abbrevs import job_abbrevs, street_abbrevs
-from past.utils import old_div
 
 #  _____________________
 # |1. CONFIGURE LABELS! |
@@ -860,7 +859,7 @@ def vowelRatio(token):
     n_chars = len(token)
     if n_chars > 1:
         n_vowels = sum(token.count(c) for c in VOWELS_Y)
-        return old_div(n_vowels, float(n_chars))
+        return n_vowels // float(n_chars)
     else:
         return False
 
