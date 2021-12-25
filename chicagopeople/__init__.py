@@ -9,6 +9,7 @@ from collections import OrderedDict
 import string
 from .ratios import ratios
 from .abbrevs import job_abbrevs, street_abbrevs
+from .known_jobs import job_freqs
 
 #  _____________________
 # |1. CONFIGURE LABELS! |
@@ -823,6 +824,8 @@ def tokenFeatures(token):
         "just.letters": token_abbrev.isalpha(),
         "roman": set("xvi").issuperset(token_abbrev),
         "endswith.vowel": token_abbrev.endswith(VOWELS_Y),
+        "endswith.hyphen": token_clean.endswith("-"),
+        "known_job": job_freqs.get(token_abbrev, False),
         "digits": digits(token_abbrev),
         # "metaphone1": metaphone[0],
         # "metaphone2": metaphone[1],
