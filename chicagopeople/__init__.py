@@ -826,6 +826,7 @@ def tokenFeatures(token):
         "endswith.vowel": token_abbrev.endswith(VOWELS_Y),
         "endswith.hyphen": token_clean.endswith("-"),
         "known_job": job_freqs.get(token_abbrev, False),
+        "like_a_job": looks_like_a_job(token_clean),
         "digits": digits(token_abbrev),
         # "metaphone1": metaphone[0],
         # "metaphone2": metaphone[1],
@@ -878,6 +879,19 @@ def digits(token):
         return "some_digits"
     else:
         return "no_digits"
+
+
+def looks_like_a_job(word: str):
+    if (
+        word.endswith("er")
+        or word.endswith("or")
+        or word.endswith("mkr")
+        or word.endswith("stress")
+        or word.endswith("man")
+        or word.endswith("wkr")
+    ):
+        return True
+    return False
 
 
 # define any other methods for features. this is an example to get the casing of a token
